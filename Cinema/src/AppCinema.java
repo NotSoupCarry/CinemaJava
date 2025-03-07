@@ -1,7 +1,8 @@
 
-import java.util.Scanner;
+import Models.Utente;
+import Utils.Controlli;
 
-import Modelli.Utente;
+import java.util.Scanner;
 
 public class AppCinema {
     private static Scanner scanner = new Scanner(System.in);
@@ -18,11 +19,12 @@ public class AppCinema {
     private static boolean menuPrincipale() {
         System.out.println("\n===== CINEMA SYSTEM =====");
         System.out.println("1. Registrati");
-        System.out.println("2. Login");
-        System.out.println("3. Esci");
+        System.out.println("2. Login utente");
+        System.out.println("3. Login gestore");
+        System.out.println("4. Esci");
         System.out.print("Scelta: ");
 
-        int scelta = scanner.nextInt();
+        int scelta = Controlli.controlloInputInteri(scanner);
         scanner.nextLine();
 
         switch (scelta) {
@@ -30,20 +32,32 @@ public class AppCinema {
                 GestioneDB.registrazione(scanner);
                 break;
             case 2:
-                 GestioneDB.login(scanner); // Assegna il risultato di login a una variabile
-                // if (utente != null) {
-                //     System.out.println("Login effettuato con successo! Benvenuto, " + utente.getNomeUtente());
-                //     if(utente.getRuolo().equals("Gestore")){
-                //         menuGestoreCinema();
-                //     }else{
-                //         menuCliente(utente);
-                //     }
-                    
-                // } else {
-                //     System.out.println("Login fallito. Riprova.");
-                // }
+                Utente utenteCliente = GestioneDB.loginCliente(scanner);
+                if (utenteCliente != null) {
+                    if (utenteCliente.getRuolo().equals("Gestore")) {
+                        menuGestoreCinema();
+                    } else {
+                        menuCliente(utenteCliente);
+                    }
+
+                } else {
+                    System.out.println("Login fallito. Riprova.");
+                }
                 break;
             case 3:
+                Utente utenteGestore = GestioneDB.loginGestore(scanner);
+                if (utenteGestore != null) {
+                    if (utenteGestore.getRuolo().equals("Gestore")) {
+                        menuGestoreCinema();
+                    } else {
+                        menuGestoreCinema();
+                    }
+
+                } else {
+                    System.out.println("Login fallito. Riprova.");
+                }
+                break;
+            case 4:
                 System.out.println("Chiusura del sistema...");
                 return true;
             default:
@@ -83,7 +97,7 @@ public class AppCinema {
         while (!exit) {
             System.out.println("\n===== MENU GESTORE CINEMA =====");
             System.out.println("1. Aggiungi un film");
-            System.out.println("2. Aggiungi una sala");
+            System.out.println("2. rimuvuovi un film");
             System.out.println("3. Logout");
             System.out.print("Scelta: ");
 
@@ -92,10 +106,17 @@ public class AppCinema {
 
             switch (scelta) {
                 case 1:
-                    GestioneDB.aggiungiFilm(scelta, null, null);
+                    System.out.println("inserisci il titolo del film");
+                    String titolo = Controlli.controlloInputStringhe(scanner);
+                    System.out.println("inserisci l'orario del film");
+                    String orario = Controlli.controlloInputStringhe(scanner);
+                    GestioneDB.aggiungiFilm(scelta, titolo, orario);
                     break;
                 case 2:
-                    //GestioneDB.rimuoviFilm(idFilm);
+                    GestioneDB.getFilms();
+                    System.out.println("inserisci l'id del film da rimuovere");
+                    int idFilm = Controlli.controlloInputInteri(scanner);
+                    GestioneDB.rimuoviFilm(idFilm);
                     break;
                 case 3:
                     System.out.println("Logout effettuato.");

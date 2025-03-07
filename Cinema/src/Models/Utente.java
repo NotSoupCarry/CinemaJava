@@ -1,4 +1,4 @@
-package Modelli;
+package Models;
 
 public abstract class Utente {
     private int id;
