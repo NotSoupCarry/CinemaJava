@@ -82,36 +82,20 @@ public class Controlli {
         return data;
     }
 
-    // Metodo per controllare l'input codice paziente sia univoco
-    public static int controlloCodicePazienteUnivoco(Scanner scanner) {
-        int codicePaziente;
+    // controllo per verificare se l'utente esiste già nel database
+    public static boolean checkUtenteEsiste(String nomeUtente) {
+        String sql = "SELECT id FROM utente WHERE nomeUtente = ?";
 
-        while (true) {
-            codicePaziente = Controlli.controlloInputInteri(scanner);
+        try (Connection conn = DBContext.connessioneDatabase();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            // Verifica che il codice paziente non sia già presente nel database
-            String query = "SELECT COUNT(*) FROM Paziente WHERE codice_paziente = ?";
+            stmt.setString(1, nomeUtente);
+            ResultSet resultSet = stmt.executeQuery();
 
-            try (Connection conn = DBContext.connessioneDatabase();
-                    PreparedStatement stmt = conn.prepareStatement(query)) {
-
-                stmt.setInt(1, codicePaziente);
-
-                ResultSet rs = stmt.executeQuery();
-                if (rs.next()) {
-                    // Se il conteggio è maggiore di 0, significa che il codice esiste già
-                    if (rs.getInt(1) > 0) {
-                        System.out.print("Codice paziente già presente.\ninserisci un altro codice: ");
-                    } else {
-                        // Codice unico, esci dal loop
-                        break;
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            return resultSet.next(); 
+        } catch (SQLException e) {
+            System.out.println("Errore nel controllo utente: " + e.getMessage());
+            return false;
         }
-
-        return codicePaziente;
     }
 }

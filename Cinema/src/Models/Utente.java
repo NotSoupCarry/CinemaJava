@@ -1,6 +1,6 @@
 package Models;
 
-abstract class Utente {
+public abstract class Utente {
     private int id;
     private String nomeUtente;
     private String password;

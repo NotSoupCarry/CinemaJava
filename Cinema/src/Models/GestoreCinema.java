@@ -4,8 +4,8 @@ import Interfaces.IAddRoom;
 
 public class GestoreCinema extends Utente implements IAddFilm, IAddRoom {
 
-    public GestoreCinema(int id, String nomeUtente, String password) {
-        super(id, nomeUtente, password, "Gestore");
+    public GestoreCinema(int id, String nomeUtente, String password, String ruolo) {
+        super(id, nomeUtente, password, ruolo);
     }
 
     @Override
