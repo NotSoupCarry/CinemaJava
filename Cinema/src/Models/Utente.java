@@ -1,3 +1,5 @@
+package Models;
+
 abstract class Utente {
     private int id;
     private String nomeUtente;
@@ -23,4 +25,12 @@ abstract class Utente {
         return ruolo;
     }
 
+
+    public boolean login(String nomeUtente, String password) {
+        return this.nomeUtente.equals(nomeUtente) && this.password.equals(password);
+    }
+
+    public void logout() {
+        System.out.println("Logout eseguito per: " + nomeUtente);
+    }
 }

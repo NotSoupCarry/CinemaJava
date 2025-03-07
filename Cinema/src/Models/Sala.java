@@ -1,3 +1,4 @@
+package Models;
 public abstract class Sala {
     private int numeroSala;
     private int posti;
@@ -13,6 +14,14 @@ public abstract class Sala {
 
     public int getPosti() {
         return posti;
+    }
+
+    public boolean prenotaPosto() {
+        if (posti > 0) {
+            posti--;
+            return true;
+        }
+        return false;
     }
 
     public abstract void mostraInfo();

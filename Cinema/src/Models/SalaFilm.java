@@ -1,3 +1,4 @@
+package Models;
 public class SalaFilm extends Sala {
     private String nomeFilm;
     private String orarioProiezione;
