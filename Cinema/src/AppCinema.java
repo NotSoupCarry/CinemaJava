@@ -75,7 +75,7 @@ public class AppCinema {
             System.out.println("2. Logout");
             System.out.print("Scelta: ");
 
-            int scelta = scanner.nextInt();
+            int scelta = Controlli.controlloInputInteri(scanner);
             scanner.nextLine();
 
             switch (scelta) {
@@ -101,8 +101,8 @@ public class AppCinema {
             System.out.println("3. Logout");
             System.out.print("Scelta: ");
 
-            int scelta = scanner.nextInt();
-            scanner.nextLine(); // Consuma il newline
+            int scelta = Controlli.controlloInputInteri(scanner);
+            scanner.nextLine(); 
 
             switch (scelta) {
                 case 1:

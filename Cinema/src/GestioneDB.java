@@ -54,7 +54,7 @@ public class GestioneDB {
         }
 
         System.out.print("Scegli un film (inserisci il numero): ");
-        int sceltaFilm = scanner.nextInt();
+        int sceltaFilm = Controlli.controlloInputInteri(scanner);;
         scanner.nextLine();
         Film filmScelto = films.get(sceltaFilm - 1);
 
@@ -67,7 +67,7 @@ public class GestioneDB {
         }
 
         System.out.print("Scegli una sala (inserisci il numero): ");
-        int sceltaSala = scanner.nextInt();
+        int sceltaSala = Controlli.controlloInputInteri(scanner);;
         scanner.nextLine();
         SalaFilm salaScelta = saleFilm.get(sceltaSala - 1);
 
@@ -146,14 +146,14 @@ public class GestioneDB {
 
         System.out.println("\n===== REGISTRAZIONE =====");
         System.out.print("Inserisci Nome Utente: ");
-        String nomeUtente = scanner.nextLine();
+        String nomeUtente = Controlli.controlloInputStringhe(scanner);
         while (Controlli.checkUtenteEsiste(nomeUtente)) {
             System.out.print("Nome utente già in uso.\nRiprova con un altro: ");
             nomeUtente = Controlli.controlloInputStringhe(scanner);
         }
 
         System.out.print("Inserisci Password: ");
-        String password = scanner.nextLine();
+        String password = Controlli.controlloInputStringhe(scanner);
 
         // Query SQL per inserire il nuovo utente
         String sql = "INSERT INTO utente (nomeUtente, password, ruolo) VALUES (?, ?, 'Cliente')";
@@ -175,45 +175,42 @@ public class GestioneDB {
 
     // Metodo per il login
     // public static Utente login(Scanner scanner) {
-    // System.out.println("\n===== LOGIN =====");
-    // System.out.print("Inserisci Nome Utente: ");
-    // String nomeUtente = scanner.nextLine();
-    // System.out.print("Inserisci Password: ");
-    // String password = scanner.nextLine();
+    //     System.out.println("\n===== LOGIN =====");
+    //     System.out.print("Inserisci Nome Utente: ");
+    //     String nomeUtente = scanner.nextLine();
+    //     System.out.print("Inserisci Password: ");
+    //     String password = scanner.nextLine();
 
-    // String sql = "SELECT id, nomeUtente, ruolo FROM utente WHERE nomeUtente = ?
-    // AND password = ?";
+    //     String sql = "SELECT id, nomeUtente, ruolo FROM utente WHERE nomeUtente = ? AND password = ?";
 
-    // try (Connection conn = DBContext.connessioneDatabase();
-    // PreparedStatement stmt = conn.prepareStatement(sql)) {
+    //     try (Connection conn = DBContext.connessioneDatabase();
+    //             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-    // stmt.setString(1, nomeUtente);
-    // stmt.setString(2, password);
-    // ResultSet resultSet = stmt.executeQuery();
+    //         stmt.setString(1, nomeUtente);
+    //         stmt.setString(2, password);
+    //         ResultSet resultSet = stmt.executeQuery();
 
-    // if (resultSet.next()) {
-    // int id = resultSet.getInt("id");
-    // String ruolo = resultSet.getString("ruolo");
+    //         if (resultSet.next()) {
+    //             int id = resultSet.getInt("id");
+    //             String ruolo = resultSet.getString("ruolo");
 
-    // System.out.println("Login effettuato con successo! Benvenuto, " + nomeUtente
-    // + ".");
+    //             System.out.println("Login effettuato con successo! Benvenuto, " + nomeUtente
+    //                     + ".");
 
-    // // Restituisci l'oggetto Cliente o GestoreCinema in base al ruolo
-    // if (ruolo.equals("Cliente")) {
-    // return new Cliente(id, nomeUtente, password, ruolo); // Cliente estende
-    // Utente
-    // } else if (ruolo.equals("GestoreCinema")) {
-    // return new GestoreCinema(id, nomeUtente, password, ruolo); // GestoreCinema
-    // estende Utente
-    // }
-    // } else {
-    // System.out.println("Credenziali errate. Riprova.");
-    // return null; // Restituisce null se le credenziali sono errate
-    // }
-    // } catch (SQLException e) {
-    // System.out.println("Errore nel login: " + e.getMessage());
-    // return null; // Restituisce null se si verifica un errore di SQL
-    // }
+    //             // Restituisci l'oggetto Cliente o GestoreCinema in base al ruolo
+    //             if (ruolo.equals("Cliente")) {
+    //                 return new Cliente(id, nomeUtente, password, ruolo);
+    //             } else if (ruolo.equals("GestoreCinema")) {
+    //                 return new GestoreCinema(id, nomeUtente, password, ruolo);
+    //             }
+    //         } else {
+    //             System.out.println("Credenziali errate. Riprova.");
+    //             return null; // Restituisce null se le credenziali sono errate
+    //         }
+    //     } catch (SQLException e) {
+    //         System.out.println("Errore nel login: " + e.getMessage());
+    //         return null; // Restituisce null se si verifica un errore di SQL
+    //     }
     // }
 
     public static Cliente loginCliente(Scanner scanner) {
@@ -235,7 +232,6 @@ public class GestioneDB {
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String ruolo = resultSet.getString("ruolo");
-
 
                 // Restituisci l'oggetto Cliente o GestoreCinema in base al ruolo
                 if (ruolo.equals("Cliente")) {
@@ -272,7 +268,6 @@ public class GestioneDB {
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String ruolo = resultSet.getString("ruolo");
-
 
                 if (ruolo.equals("Gestore")) {
                     System.out.println("Login effettuato con successo! Benvenuto, " + nomeUtente + ".");
