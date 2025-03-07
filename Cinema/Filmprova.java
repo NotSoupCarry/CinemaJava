@@ -35,6 +35,11 @@ class GestoreCinema {
         System.out.println("Film aggiunto: " + titolo + ", Orario: " + orario);
     }
 
+    public void rimuoviFilm(int id) {
+        filmCatalogo.removeIf(film -> film.getId() == id);
+        System.out.println("Film con ID " + id + " rimosso dal catalogo.");
+    }
+
     public void gestisciSale() {
         System.out.println("Gestione delle sale in corso...");
     }
