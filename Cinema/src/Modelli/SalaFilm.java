@@ -1,4 +1,4 @@
-package Models;
+package Modelli;
 
 public class SalaFilm extends Sala {
     private int id;

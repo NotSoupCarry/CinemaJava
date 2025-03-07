@@ -1,4 +1,4 @@
-package Models;
+package Modelli;
 
 public class Cliente extends Utente {
 

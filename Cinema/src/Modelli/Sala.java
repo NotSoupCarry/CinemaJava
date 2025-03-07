@@ -1,4 +1,4 @@
-package Models;
+package Modelli;
 public abstract class Sala {
     private int numeroSala;
     private int posti;

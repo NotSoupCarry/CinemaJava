@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Models.Cliente;
-import Models.Film;
-import Models.GestoreCinema;
-import Models.SalaFilm;
-import Models.Utente;
+import Modelli.Cliente;
+import Modelli.Film;
+import Modelli.GestoreCinema;
+import Modelli.SalaFilm;
+import Modelli.Utente;
 import Utils.Controlli;
 import Utils.DBContext;
 

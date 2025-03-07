@@ -1,9 +1,7 @@
-import Models.Cliente;
-import Models.GestoreCinema;
-import Models.Utente;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
+
+import Modelli.Utente;
 
 public class AppCinema {
     private static Scanner scanner = new Scanner(System.in);
@@ -32,18 +30,18 @@ public class AppCinema {
                 GestioneDB.registrazione(scanner);
                 break;
             case 2:
-                Utente utente = GestioneDB.login(scanner); // Assegna il risultato di login a una variabile
-                if (utente != null) {
-                    System.out.println("Login effettuato con successo! Benvenuto, " + utente.getNomeUtente());
-                    if(utente.getRuolo().equals("Gestore")){
-                        menuGestoreCinema();
-                    }else{
-                        menuCliente(utente);
-                    }
+                 GestioneDB.login(scanner); // Assegna il risultato di login a una variabile
+                // if (utente != null) {
+                //     System.out.println("Login effettuato con successo! Benvenuto, " + utente.getNomeUtente());
+                //     if(utente.getRuolo().equals("Gestore")){
+                //         menuGestoreCinema();
+                //     }else{
+                //         menuCliente(utente);
+                //     }
                     
-                } else {
-                    System.out.println("Login fallito. Riprova.");
-                }
+                // } else {
+                //     System.out.println("Login fallito. Riprova.");
+                // }
                 break;
             case 3:
                 System.out.println("Chiusura del sistema...");
