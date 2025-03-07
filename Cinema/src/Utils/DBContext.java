@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBContext {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/ospedaledb";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/cinemaDB";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "root";
 
